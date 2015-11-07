@@ -1,10 +1,10 @@
 package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,12 +16,14 @@ import java.util.Set;
 public class Account {
 
     @OneToMany(mappedBy = "account")
-    private Set<Bookmark> bookmarks=new HashSet<Bookmark>();
-    @GeneratedValue
+    public Set<Bookmark> bookmarks = new HashSet<>();
+
     @Id
-    private Long id;
+    @GeneratedValue
+    public Long id;
+
     @JsonIgnore
-    private String password;
+    public String password;
     public String username;
 
     public Account(String name, String password) {
@@ -29,25 +31,6 @@ public class Account {
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    Account() { // jpa only
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
 }
